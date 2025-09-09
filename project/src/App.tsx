@@ -23,7 +23,7 @@ function App() {
               className="w-44 h-44 rounded-2xl object-cover shadow-xl transform -rotate-1 hover:rotate-0 transition-transform duration-300"
             />
             <img 
-              src="/src/images/WhatsApp Image 2025-08-28 at 19.35.26_e82f5c56.jpg" 
+              src="/images/WhatsApp Image 2025-08-28 at 19.35.26_e82f5c56.jpg" 
               alt="Authentic student moments" 
               className="w-40 h-40 rounded-2xl object-cover shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300"
             />

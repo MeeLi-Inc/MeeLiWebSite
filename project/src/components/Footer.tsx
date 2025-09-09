@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/src/assets/WhatsApp Image 2025-07-19 at 13.50.42_f2aedb83.jpg" 
+                src="/images/WhatsApp Image 2025-07-19 at 13.50.42_f2aedb83.jpg" 
                 alt="MeeLi Logo" 
                 className="w-10 h-10 rounded-xl"
               />

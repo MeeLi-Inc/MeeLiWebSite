@@ -8,7 +8,7 @@ const Hero = () => {
         {/* Logo */}
         <div className="mb-8 flex items-center justify-center space-x-4">
           <img 
-            src="/src/assets/WhatsApp Image 2025-07-19 at 13.50.42_f2aedb83.jpg" 
+            src="/images/WhatsApp Image 2025-07-19 at 13.50.42_f2aedb83.jpg" 
             alt="MeeLi Logo" 
             className="w-16 h-16 rounded-2xl shadow-lg"
           />
