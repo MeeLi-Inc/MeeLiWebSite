@@ -213,7 +213,7 @@ const PrivacyPage = () => {
             <RightRow
               icon={<Flag className="w-5 h-5 text-red-700" />}
               title="Report a user or content"
-              body="See something that breaks the rules? Hit Report on any profile, post, video, event, or message. Our team reviews every report and acts on violations — content removal, account suspension, or permanent ban."
+              body="See something that breaks the rules? Hit Report on any profile, post, video, or event. Our team reviews every report and acts on violations — content removal, account suspension, or permanent ban."
             />
             <RightRow
               icon={<Scale className="w-5 h-5 text-red-700" />}
