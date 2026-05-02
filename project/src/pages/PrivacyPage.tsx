@@ -299,9 +299,11 @@ const PrivacyPage = () => {
               </p>
             </div>
           </div>
-          <p className="text-sm text-slate-500 mt-6 text-center">
-            We do not knowingly collect or store data from children under 13. If you believe a
-            child under 13 has created an account, email{' '}
+          <p className="text-sm text-slate-500 mt-6 text-center max-w-2xl mx-auto leading-relaxed">
+            We do not knowingly collect or store data from anyone under 17, and we follow
+            stricter protections for children under 13 in line with COPPA and similar
+            children's-privacy laws. If you believe a minor — and especially a child under 13 —
+            has created an account, email{' '}
             <a
               href="mailto:support@meeli.social"
               className="text-red-700 hover:text-red-800 underline"
