@@ -208,7 +208,7 @@ const PrivacyPage = () => {
             <RightRow
               icon={<UserX className="w-5 h-5 text-red-700" />}
               title="Block another user"
-              body="On any profile, tap the menu and choose Block. Blocked users can't message you, see your posts, or appear in your feed, and you won't see theirs."
+              body="On any profile, tap the menu and choose Block. Blocked users can't message you, see your posts, or appear in your feed, and you won't see theirs — except in shared group chats, which you can leave any time."
             />
             <RightRow
               icon={<Flag className="w-5 h-5 text-red-700" />}
