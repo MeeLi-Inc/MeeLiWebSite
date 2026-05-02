@@ -16,6 +16,7 @@ import {
   Heart,
   Sparkles,
   Building2,
+  Scale,
 } from 'lucide-react';
 
 const PrivacyPage = () => {
@@ -46,6 +47,7 @@ const PrivacyPage = () => {
           <p className="text-lg text-slate-600 max-w-2xl leading-relaxed">
             How we handle your data, the controls you have, the permissions we ask for, and our company details — written plainly.
           </p>
+          <p className="text-sm text-slate-500 mt-4">Last updated: May 2026</p>
         </div>
       </header>
 
@@ -149,19 +151,12 @@ const PrivacyPage = () => {
                 <>
                   Email{' '}
                   <a
-                    href="mailto:privacy@meelimeetlife.com"
+                    href="mailto:support@meeli.social"
                     className="text-red-700 hover:text-red-800 underline"
                   >
-                    privacy@meelimeetlife.com
+                    support@meeli.social
                   </a>{' '}
-                  for anything privacy-related, or{' '}
-                  <a
-                    href="mailto:support@meelimeetlife.com"
-                    className="text-red-700 hover:text-red-800 underline"
-                  >
-                    support@meelimeetlife.com
-                  </a>{' '}
-                  for everything else.
+                  — privacy questions, support, or anything else, all go to the same place.
                 </>
               }
             />
@@ -190,10 +185,10 @@ const PrivacyPage = () => {
                 <>
                   Want everything we have on you? Email{' '}
                   <a
-                    href="mailto:privacy@meelimeetlife.com"
+                    href="mailto:support@meeli.social"
                     className="text-red-700 hover:text-red-800 underline"
                   >
-                    privacy@meelimeetlife.com
+                    support@meeli.social
                   </a>{' '}
                   from the address tied to your account. We'll send your data within 30 days, free
                   of charge.
@@ -219,6 +214,11 @@ const PrivacyPage = () => {
               icon={<Flag className="w-5 h-5 text-red-700" />}
               title="Report a user or content"
               body="See something that breaks the rules? Hit Report on any profile, post, video, event, or message. Our team reviews every report and acts on violations — content removal, account suspension, or permanent ban."
+            />
+            <RightRow
+              icon={<Scale className="w-5 h-5 text-red-700" />}
+              title="Lodge a complaint with a regulator"
+              body="If you're in the EU, UK, or another region with a data protection authority and you believe we've mishandled your data, you have the right to complain to your local supervisory authority. We'd much rather hear from you first — but the right is yours either way."
               isLast
             />
           </div>
@@ -299,6 +299,17 @@ const PrivacyPage = () => {
               </p>
             </div>
           </div>
+          <p className="text-sm text-slate-500 mt-6 text-center">
+            We do not knowingly collect or store data from children under 13. If you believe a
+            child under 13 has created an account, email{' '}
+            <a
+              href="mailto:support@meeli.social"
+              className="text-red-700 hover:text-red-800 underline"
+            >
+              support@meeli.social
+            </a>{' '}
+            and we'll remove it.
+          </p>
         </div>
       </section>
 
@@ -311,7 +322,11 @@ const PrivacyPage = () => {
               <span className="font-kalam text-red-700 ml-3">registration</span>
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              The official record, as registered with our payments profile.
+              The official record, as registered with our payments profile.{' '}
+              <span className="font-semibold text-slate-700">
+                MeeLi, Inc. is the data controller
+              </span>{' '}
+              for the information described on this page.
             </p>
           </div>
 
@@ -340,6 +355,17 @@ const PrivacyPage = () => {
               />
             </dl>
           </div>
+        </div>
+      </section>
+
+      {/* Changes notice */}
+      <section className="py-12 bg-white border-t border-slate-100">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-sm text-slate-500 leading-relaxed">
+            <span className="font-semibold text-slate-700">Changes to this page.</span> If we
+            update how we handle your data, we'll change the "Last updated" date at the top and
+            — for anything material — we'll notify you in the app before it takes effect.
+          </p>
         </div>
       </section>
 
