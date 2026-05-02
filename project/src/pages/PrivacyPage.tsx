@@ -127,7 +127,7 @@ const PrivacyPage = () => {
             <DataCard
               icon={<Mail className="w-6 h-6 text-red-700" />}
               title="Your university email"
-              body="Used once to confirm you're a student. After that, we never email you there."
+              body="Used to send you one-time sign-in codes — that's it. We never use it for marketing, newsletters, or third-party sharing."
             />
             <DataCard
               icon={<Compass className="w-6 h-6 text-red-700" />}
@@ -293,9 +293,10 @@ const PrivacyPage = () => {
               </div>
               <p className="text-slate-600 leading-relaxed">
                 Most posts go up right away. A few things — like challenges — are reviewed
-                before they go public. And anything reported for breaking the rules
-                (AI-generated content, harassment, nudity, impersonation, spam) gets reviewed
-                by our team and acted on quickly.
+                before they go public. Reports fall into six categories: inappropriate
+                content, harassment or bullying, spam or promotional, misinformation,
+                safety concerns, and other. Every report is reviewed by our team and acted
+                on — content removal, account suspension, or permanent ban.
               </p>
             </div>
           </div>
