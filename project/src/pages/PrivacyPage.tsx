@@ -236,7 +236,17 @@ const PrivacyPage = () => {
             <RightRow
               icon={<Trash2 className="w-5 h-5 text-red-700" />}
               title="Delete your account & data"
-              body="Open Settings → Delete Account. Your posts, messages, and profile are permanently removed within 30 days."
+              body={
+                <>
+                  Open Settings → Delete Account. Your posts, messages, and
+                  profile are permanently removed within 30 days. One narrow
+                  exception: where law requires us to preserve specific data
+                  for a specific period — for example, the NCMEC
+                  preservation rule that applies to child-safety reports —
+                  we hold that data for the legally required time before
+                  deleting. See <a href="#child-safety" className="text-red-700 hover:text-red-800 underline">Child safety</a> below.
+                </>
+              }
             />
             <RightRow
               icon={<UserX className="w-5 h-5 text-red-700" />}
@@ -395,7 +405,7 @@ const PrivacyPage = () => {
             <RightRow
               icon={<Scale className="w-5 h-5 text-red-700" />}
               title="What happens next"
-              body="Every child-safety report is reviewed by a human on our team — no automation triages this queue. Where US federal law applies, we file a report with the NCMEC CyberTipline (18 U.S.C. § 2258A), and we cooperate with law-enforcement requests worldwide."
+              body="Every child-safety report is reviewed by a human on our team — no automation triages this queue. Where US federal law applies, we file a report with the NCMEC CyberTipline (18 U.S.C. § 2258A) and cooperate with law-enforcement requests worldwide. For these reports, US federal law requires us to preserve the relevant account and content for at least 90 days — even if the offending user has requested account deletion — and that preservation overrides the 30-day deletion window described above."
             />
             <RightRow
               icon={<Heart className="w-5 h-5 text-red-700" />}
