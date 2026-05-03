@@ -19,6 +19,15 @@ import {
   Scale,
 } from 'lucide-react';
 
+const SECTIONS = [
+  { id: 'what-is-meeli', label: 'What is MeeLi' },
+  { id: 'data', label: 'Your data' },
+  { id: 'rights', label: 'Rights & controls' },
+  { id: 'permissions', label: 'Device permissions' },
+  { id: 'community', label: 'Community & age' },
+  { id: 'company', label: 'Company' },
+];
+
 const PrivacyPage = () => {
   return (
     <div className="min-h-screen bg-stone-50">
@@ -51,8 +60,31 @@ const PrivacyPage = () => {
         </div>
       </header>
 
+      {/* Section navigation */}
+      <nav
+        aria-label="On this page"
+        className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-orange-200 shadow-sm"
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-thin">
+            <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 mr-2 flex-shrink-0">
+              Jump to
+            </span>
+            {SECTIONS.map((section) => (
+              <a
+                key={section.id}
+                href={`#${section.id}`}
+                className="flex-shrink-0 px-3 py-1.5 rounded-full text-sm text-slate-700 hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 transition-colors duration-200"
+              >
+                {section.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </nav>
+
       {/* What is MeeLi */}
-      <section id="what-is-meeli" className="py-16 bg-white">
+      <section id="what-is-meeli" className="py-16 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
             What is
@@ -101,7 +133,7 @@ const PrivacyPage = () => {
       </section>
 
       {/* Your data, in plain English */}
-      <section id="data" className="py-16 bg-stone-50">
+      <section id="data" className="py-16 bg-stone-50 scroll-mt-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
@@ -165,7 +197,7 @@ const PrivacyPage = () => {
       </section>
 
       {/* Your rights & controls */}
-      <section id="rights" className="py-16 bg-white">
+      <section id="rights" className="py-16 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
@@ -226,7 +258,7 @@ const PrivacyPage = () => {
       </section>
 
       {/* Device permissions */}
-      <section id="permissions" className="py-16 bg-stone-50">
+      <section id="permissions" className="py-16 bg-stone-50 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
@@ -266,7 +298,7 @@ const PrivacyPage = () => {
       </section>
 
       {/* Community & age */}
-      <section id="community" className="py-16 bg-white">
+      <section id="community" className="py-16 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
@@ -317,7 +349,7 @@ const PrivacyPage = () => {
       </section>
 
       {/* Company registration */}
-      <section id="company" className="py-16 bg-stone-50">
+      <section id="company" className="py-16 bg-stone-50 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
