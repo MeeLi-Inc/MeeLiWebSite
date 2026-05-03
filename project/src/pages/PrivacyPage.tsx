@@ -374,10 +374,14 @@ const PrivacyPage = () => {
               title="How to report it"
               body={
                 <>
-                  In the app, tap Report on any profile, post, video, or message
-                  and choose{' '}
+                  In the app, tap Report on any profile, post, or video and
+                  choose{' '}
                   <span className="font-semibold text-slate-700">Child safety</span>.
-                  For anything urgent or off-platform, email{' '}
+                  If the concern is about something a user sent you in chat,
+                  open their profile and report the user — include the rough
+                  time and what was said in the additional-context box so our
+                  team can locate the message. For anything urgent or
+                  off-platform, email{' '}
                   <a
                     href="mailto:support@meeli.social"
                     className="text-red-700 hover:text-red-800 underline"
