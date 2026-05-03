@@ -25,6 +25,7 @@ const SECTIONS = [
   { id: 'rights', label: 'Rights & controls' },
   { id: 'permissions', label: 'Device permissions' },
   { id: 'community', label: 'Community & age' },
+  { id: 'child-safety', label: 'Child safety' },
   { id: 'company', label: 'Company' },
 ];
 
@@ -325,10 +326,10 @@ const PrivacyPage = () => {
               </div>
               <p className="text-slate-600 leading-relaxed">
                 Most posts go up right away. A few things — like challenges — are reviewed
-                before they go public. Reports fall into six categories: inappropriate
+                before they go public. Reports fall into seven categories: inappropriate
                 content, harassment or bullying, spam or promotional, misinformation,
-                safety concerns, and other. Every report is reviewed by our team and acted
-                on — content removal, account suspension, or permanent ban.
+                safety concerns, child safety, and other. Every report is reviewed by our
+                team and acted on — content removal, account suspension, or permanent ban.
               </p>
             </div>
           </div>
@@ -348,8 +349,92 @@ const PrivacyPage = () => {
         </div>
       </section>
 
+      {/* Child safety */}
+      <section id="child-safety" className="py-16 bg-stone-50 scroll-mt-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
+              Child
+              <span className="font-kalam text-red-700 ml-3">safety</span>
+            </h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Zero tolerance for child sexual abuse material (CSAM) or any sexual
+              exploitation of minors. This is how we hold that line in practice.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-3xl p-8 md:p-10 border border-red-200 shadow-lg">
+            <RightRow
+              icon={<Shield className="w-5 h-5 text-red-700" />}
+              title="Zero tolerance"
+              body="CSAM and the sexual exploitation of minors are never allowed on MeeLi. When we receive a credible report, the content is removed immediately, the account is permanently banned, and we preserve the account and content for law enforcement."
+            />
+            <RightRow
+              icon={<Flag className="w-5 h-5 text-red-700" />}
+              title="How to report it"
+              body={
+                <>
+                  In the app, tap Report on any profile, post, video, or message
+                  and choose{' '}
+                  <span className="font-semibold text-slate-700">Child safety</span>.
+                  For anything urgent or off-platform, email{' '}
+                  <a
+                    href="mailto:support@meeli.social"
+                    className="text-red-700 hover:text-red-800 underline"
+                  >
+                    support@meeli.social
+                  </a>{' '}
+                  with the subject "Child safety".
+                </>
+              }
+            />
+            <RightRow
+              icon={<Scale className="w-5 h-5 text-red-700" />}
+              title="What happens next"
+              body="Every child-safety report is reviewed by a human on our team — no automation triages this queue. Where US federal law applies, we file a report with the NCMEC CyberTipline (18 U.S.C. § 2258A), and we cooperate with law-enforcement requests worldwide."
+            />
+            <RightRow
+              icon={<Heart className="w-5 h-5 text-red-700" />}
+              title="Verified students, 17+"
+              body="Sign-up requires a university email and an age attestation. We do not knowingly collect data from anyone under 17, with stricter protections for children under 13 in line with COPPA and similar children's-privacy laws."
+              isLast
+            />
+          </div>
+
+          <p className="text-sm text-slate-500 mt-6 text-center max-w-2xl mx-auto leading-relaxed">
+            <span className="font-semibold text-slate-700">External resources:</span>{' '}
+            <a
+              href="https://report.cybertip.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-700 hover:text-red-800 underline"
+            >
+              NCMEC CyberTipline
+            </a>{' '}
+            ·{' '}
+            <a
+              href="https://www.iwf.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-700 hover:text-red-800 underline"
+            >
+              Internet Watch Foundation
+            </a>{' '}
+            ·{' '}
+            <a
+              href="https://www.stopitnow.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-red-700 hover:text-red-800 underline"
+            >
+              Stop It Now
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* Company registration */}
-      <section id="company" className="py-16 bg-stone-50 scroll-mt-20">
+      <section id="company" className="py-16 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
