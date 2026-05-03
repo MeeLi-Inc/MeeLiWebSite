@@ -239,12 +239,16 @@ const PrivacyPage = () => {
               body={
                 <>
                   Open Settings → Delete Account. Your posts, messages, and
-                  profile are permanently removed within 30 days. One narrow
-                  exception: where law requires us to preserve specific data
-                  for a specific period — for example, the NCMEC
-                  preservation rule that applies to child-safety reports —
-                  we hold that data for the legally required time before
-                  deleting. See <a href="#child-safety" className="text-red-700 hover:text-red-800 underline">Child safety</a> below.
+                  profile are permanently removed within 30 days. Limited
+                  exceptions apply where law requires us to preserve
+                  specific data for a specific period — for example, NCMEC
+                  preservation rules that apply to child-safety reports
+                  (see <a href="#child-safety" className="text-red-700 hover:text-red-800 underline">Child safety</a> below), valid law-enforcement
+                  preservation requests or subpoenas, ongoing legal
+                  proceedings, and any open trust-and-safety investigation
+                  or appeal involving the account. In those cases we hold
+                  the relevant data for the legally required period before
+                  deleting it.
                 </>
               }
             />
