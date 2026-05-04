@@ -23,6 +23,7 @@ const SECTIONS = [
   { id: 'what-is-meeli', label: 'What is MeeLi' },
   { id: 'data', label: 'Your data' },
   { id: 'rights', label: 'Rights & controls' },
+  { id: 'delete-my-account', label: 'Account deletion' },
   { id: 'permissions', label: 'Device permissions' },
   { id: 'community', label: 'Community & age' },
   { id: 'child-safety', label: 'Child safety' },
@@ -269,6 +270,64 @@ const PrivacyPage = () => {
               isLast
             />
           </div>
+        </div>
+      </section>
+
+      {/* Account deletion (Play Store "App access" — required URL anchor #delete-my-account) */}
+      <section id="delete-my-account" className="py-16 bg-stone-50 scroll-mt-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
+              Account
+              <span className="font-kalam text-red-700 ml-3">deletion</span>
+            </h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Two ways to permanently remove your MeeLi account. Both
+              delete the same data, both finish within 30 days.
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-3xl p-8 md:p-10 border border-red-200 shadow-lg">
+            <RightRow
+              icon={<Trash2 className="w-5 h-5 text-red-700" />}
+              title="From inside the app"
+              body="Open Settings → Delete Account, then confirm. This permanently removes your account and all of your data."
+            />
+            <RightRow
+              icon={<Mail className="w-5 h-5 text-red-700" />}
+              title="By email (if you can't sign into the app)"
+              body={
+                <>
+                  Email{' '}
+                  <a
+                    href="mailto:support@meeli.social?subject=Account%20deletion"
+                    className="text-red-700 hover:text-red-800 underline"
+                  >
+                    support@meeli.social
+                  </a>{' '}
+                  with the subject "Account deletion". The request must
+                  come from the email address tied to your MeeLi account
+                  — we use that to verify it's really you, and we
+                  won't act on a request sent from any other address. If
+                  you have a username, please include it so we can find
+                  the account quickly.
+                </>
+              }
+              isLast
+            />
+          </div>
+
+          <p className="text-sm text-slate-500 mt-6 text-center max-w-2xl mx-auto leading-relaxed">
+            <span className="font-semibold text-slate-700">What gets removed:</span>{' '}
+            your profile, posts, videos, messages, chat threads,
+            connections, Journey entries, points, and the media you've
+            uploaded. Your sign-in identity is removed too.
+            <br />
+            <span className="font-semibold text-slate-700">How long:</span>{' '}
+            within 30 days, except where we are legally required to
+            preserve specific data — see the carve-out under{' '}
+            <a href="#rights" className="text-red-700 hover:text-red-800 underline">Rights &amp; controls</a>.
+          </p>
         </div>
       </section>
 
