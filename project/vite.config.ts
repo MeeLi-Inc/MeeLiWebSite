@@ -12,13 +12,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        about: 'about-meeli.html',
-        community: 'community-guidelines.html',
-        copyright: 'copyright.html',
-        dataDeletion: 'data-deletion.html',
         privacy: 'privacy.html',
-        safety: 'safety-moderation.html',
-        terms: 'terms.html',
       },
     },
   },
