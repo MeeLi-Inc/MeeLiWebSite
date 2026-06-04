@@ -1,11 +1,20 @@
 import React from 'react';
-import { Users, Instagram, Mail, Linkedin } from 'lucide-react';
+import { Instagram, Mail, Linkedin, FileText, Shield } from 'lucide-react';
+
+const policyLinks = [
+  { href: '/terms.html', label: 'Terms of Service' },
+  { href: '/privacy.html', label: 'Privacy Policy' },
+  { href: '/community-guidelines.html', label: 'Community Guidelines' },
+  { href: '/safety-moderation.html', label: 'Safety & Moderation' },
+  { href: '/data-deletion.html', label: 'Data Deletion' },
+  { href: '/copyright.html', label: 'Copyright Policy' },
+];
 
 const Footer = () => {
   return (
     <footer className="bg-slate-800 text-white py-16">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
@@ -53,6 +62,34 @@ const Footer = () => {
               <Instagram className="w-5 h-5 mr-2" />
               Instagram
             </a>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Company</h4>
+            <a
+              href="/about-meeli.html"
+              className="inline-flex items-center text-slate-400 hover:text-white transition-colors duration-300"
+            >
+              <Shield className="w-4 h-4 mr-2" />
+              <span className="text-sm">About MeeLi</span>
+            </a>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Policies</h4>
+            <div className="space-y-2">
+              {policyLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center text-slate-400 hover:text-white transition-colors duration-300"
+                >
+                  <FileText className="w-4 h-4 mr-2 flex-shrink-0" />
+                  <span className="text-sm">{link.label}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
         
