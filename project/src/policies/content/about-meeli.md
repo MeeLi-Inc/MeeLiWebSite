@@ -1,11 +1,4 @@
-
-
-| About MeeLi |  |
-| :---- | ----: |
-
-Welcome to
-
-**MeeLi \- Meet Life**
+Welcome to **MeeLi \- Meet Life**
 
 *A healthy social app for students.*
 
