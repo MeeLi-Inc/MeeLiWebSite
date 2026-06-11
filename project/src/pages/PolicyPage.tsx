@@ -1,146 +1,150 @@
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import type { Components } from 'react-markdown';
 import { ArrowLeft, FileText, Home, Mail } from 'lucide-react';
 import { PolicyDocument, policyDocuments } from '../policies/policyData';
 
-type ContentBlock =
-  | { type: 'heading'; text: string; id: string }
-  | { type: 'subheading'; text: string }
-  | { type: 'paragraph'; text: string }
-  | { type: 'list'; items: string[] };
-
-const policyLinkMap = new Map([
-  ['Terms of Service', '/terms.html'],
-  ['Privacy Policy', '/privacy.html'],
-  ['Community & Content Guidelines', '/community-guidelines.html'],
-  ['Safety & Moderation Policy', '/safety-moderation.html'],
-  ['Data & Account Deletion', '/data-deletion.html'],
-  ['Copyright Policy', '/copyright.html'],
-]);
-
-const headingPattern = /^((\d+)\.\s+.+|[A-Z][A-Za-z &]+|.+ Guidelines|.+ Policy)$/;
-
-const slugify = (value: string) =>
-  value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-
-const stripDecorativePrefix = (value: string) =>
-  value
-    .replace(/^[^\w]+/u, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-
-const isHeading = (line: string) => {
-  const cleanLine = stripDecorativePrefix(line);
-
-  if (/^\d+\.\s+/.test(cleanLine)) {
-    return true;
-  }
-
-  if (/^(Quick Guidelines|Moderation Overview|Our Mission|What MeeLi Is|What We Believe|Why MeeLi Exists|Let.s Meet Life|Copyright & Intellectual Property|Account Deletion & Your Data)$/i.test(cleanLine)) {
-    return true;
-  }
-
-  return headingPattern.test(cleanLine) && cleanLine.length < 80;
-};
-
-const isSubheading = (line: string) => {
-  const cleanLine = stripDecorativePrefix(line);
-  return /^[A-Z][A-Za-z &()0-9-]+$/.test(cleanLine) && cleanLine.length < 60;
-};
-
-const parseContent = (content: string): ContentBlock[] => {
-  const blocks: ContentBlock[] = [];
-  const lines = content
-    .split('\n')
-    .map((line) => line.trim())
-    .filter(Boolean);
-  let pendingBullets: string[] = [];
-
-  const flushBullets = () => {
-    if (pendingBullets.length) {
-      blocks.push({ type: 'list', items: pendingBullets });
-      pendingBullets = [];
-    }
-  };
-
-  lines.forEach((line, index) => {
-    if (index < 4 && !/Effective/i.test(line) && !/Plain English|short version/i.test(line)) {
-      return;
-    }
-
-    const cleanLine = line.replace(/^[-•]\s*/, '').replace(/^\t+/, '').trim();
-
-    if (/^[•*-]\s*/.test(line) || line.startsWith('•') || line.startsWith('-')) {
-      pendingBullets.push(cleanLine);
-      return;
-    }
-
-    flushBullets();
-
-    if (/^Effective\s+/i.test(cleanLine) || /^MeeLi\s+·/i.test(cleanLine) || /^MeeLi Inc\./i.test(cleanLine)) {
-      return;
-    }
-
-    if (isHeading(cleanLine)) {
-      const text = stripDecorativePrefix(cleanLine);
-      blocks.push({ type: 'heading', text, id: slugify(text) });
-      return;
-    }
-
-    if (isSubheading(cleanLine)) {
-      blocks.push({ type: 'subheading', text: stripDecorativePrefix(cleanLine) });
-      return;
-    }
-
-    blocks.push({ type: 'paragraph', text: cleanLine });
+// Terms & Privacy use **N\. Title** bold paragraphs for numbered sections.
+// Normalise them to ## headings so styling and ToC work uniformly.
+const normalizeMarkdown = (content: string): string =>
+  content.replace(/^(\*\*\d+\\?\.\s+[^*\n]+\*\*)$/gm, (match) => {
+    const text = match.replace(/^\*\*/, '').replace(/\*\*$/, '').replace(/\\/g, '');
+    return `## ${text}`;
   });
 
-  flushBullets();
-  return blocks;
+const slugify = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const childrenToText = (children: React.ReactNode): string => {
+  if (typeof children === 'string') return children;
+  if (typeof children === 'number') return String(children);
+  if (Array.isArray(children)) return children.map(childrenToText).join('');
+  if (React.isValidElement(children))
+    return childrenToText((children.props as { children?: React.ReactNode }).children);
+  return '';
 };
 
-const renderLinkedText = (text: string) => {
-  const emailMatch = text.match(/support@meeli\.social/);
+const extractTocHeadings = (content: string) =>
+  [...normalizeMarkdown(content).matchAll(/^## (.+)$/gm)]
+    .map((m) => {
+      const raw = m[1].replace(/\*\*/g, '').replace(/[*_\\]/g, '').trim();
+      // strip leading emoji chars
+      const text = raw.replace(/^[^\w\s]+\s*/, '').trim();
+      return text ? { text, id: slugify(text) } : null;
+    })
+    .filter((h): h is { text: string; id: string } => h !== null);
 
-  if (emailMatch) {
-    const [before, after] = text.split('support@meeli.social');
+const buildComponents = (): Components => ({
+  // ── Headings ──────────────────────────────────────────────────────────────
+  h1: ({ children }) => (
+    <h2 className="scroll-mt-24 pt-6 text-2xl md:text-3xl font-bold text-slate-800 border-b border-orange-100 pb-2">
+      {children}
+    </h2>
+  ),
+  h2: ({ children }) => {
+    const raw = childrenToText(children).replace(/[^\w\s-]/g, '').trim().replace(/^[^\w\s]+\s*/, '');
+    const id = slugify(raw);
     return (
-      <>
-        {renderLinkedText(before)}
-        <a href="mailto:support@meeli.social" className="text-red-700 underline hover:text-red-800">
-          support@meeli.social
-        </a>
-        {renderLinkedText(after)}
-      </>
+      <h3 id={id} className="scroll-mt-24 pt-8 text-xl md:text-2xl font-bold text-slate-800">
+        {children}
+      </h3>
     );
-  }
+  },
+  h3: ({ children }) => (
+    <h4 className="pt-4 text-base font-semibold text-slate-700 uppercase tracking-wide">
+      {children}
+    </h4>
+  ),
 
-  for (const [label, href] of policyLinkMap) {
-    if (text.includes(label)) {
-      const [before, after] = text.split(label);
-      return (
-        <>
-          {renderLinkedText(before)}
-          <a href={href} className="text-red-700 underline hover:text-red-800">
-            {label}
-          </a>
-          {renderLinkedText(after)}
-        </>
-      );
-    }
-  }
+  // ── Body text ─────────────────────────────────────────────────────────────
+  p: ({ children }) => (
+    <p className="text-slate-600 leading-relaxed">{children}</p>
+  ),
+  strong: ({ children }) => (
+    <strong className="font-semibold text-slate-800">{children}</strong>
+  ),
+  em: ({ children }) => (
+    <em className="italic text-slate-500">{children}</em>
+  ),
 
-  return text;
-};
+  // ── Lists ─────────────────────────────────────────────────────────────────
+  ul: ({ children }) => (
+    <ul className="space-y-1.5 pl-5 list-disc text-slate-600 leading-relaxed marker:text-orange-400">
+      {children}
+    </ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="space-y-1.5 pl-5 list-decimal text-slate-600 leading-relaxed marker:text-orange-500">
+      {children}
+    </ol>
+  ),
+  li: ({ children }) => (
+    <li className="leading-relaxed pl-1">{children}</li>
+  ),
+
+  // ── Divider ───────────────────────────────────────────────────────────────
+  hr: () => <hr className="border-orange-100 my-2" />,
+
+  // ── Links ─────────────────────────────────────────────────────────────────
+  a: ({ href, children }) => (
+    <a
+      href={href}
+      className="text-red-700 underline underline-offset-2 hover:text-red-800 transition-colors"
+    >
+      {children}
+    </a>
+  ),
+
+  // ── Tables (used as callout boxes in these docs) ──────────────────────────
+  table: ({ children }) => (
+    <div className="rounded-xl border border-orange-200 bg-orange-50 overflow-hidden my-1">
+      <table className="w-full">{children}</table>
+    </div>
+  ),
+  thead: ({ children }) => <thead className="border-b border-orange-200">{children}</thead>,
+  tbody: ({ children }) => <tbody>{children}</tbody>,
+  tr: ({ children }) => (
+    <tr className="border-b border-orange-100 last:border-0">{children}</tr>
+  ),
+  th: ({ children }) => (
+    <th className="px-5 py-3 text-left text-sm font-medium text-slate-700 align-top leading-relaxed">
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td className="px-5 py-3 text-sm text-slate-600 align-top leading-relaxed">{children}</td>
+  ),
+
+  // ── Code ──────────────────────────────────────────────────────────────────
+  code: ({ children }) => (
+    <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono text-slate-700">
+      {children}
+    </code>
+  ),
+
+  // ── Blockquote ────────────────────────────────────────────────────────────
+  blockquote: ({ children }) => (
+    <blockquote className="border-l-4 border-orange-300 pl-4 italic text-slate-500 my-1">
+      {children}
+    </blockquote>
+  ),
+});
+
+const components = buildComponents();
 
 const PolicyPage = ({ document }: { document: PolicyDocument }) => {
-  const blocks = parseContent(document.content);
-  const sections = blocks.filter((block): block is Extract<ContentBlock, { type: 'heading' }> => block.type === 'heading');
-  const relatedPolicies = policyDocuments.filter((policy) => policy.path !== document.path);
+  const normalized = normalizeMarkdown(document.content);
+  const tocHeadings = extractTocHeadings(document.content);
+  const relatedPolicies = policyDocuments.filter((p) => p.path !== document.path);
 
   return (
     <div className="min-h-screen bg-stone-50">
+      {/* ── Header ──────────────────────────────────────────────────────── */}
       <header className="bg-gradient-to-br from-orange-50 to-orange-100 border-b border-orange-200">
         <div className="max-w-6xl mx-auto px-6 py-10">
           <a
@@ -171,7 +175,8 @@ const PolicyPage = ({ document }: { document: PolicyDocument }) => {
         </div>
       </header>
 
-      {sections.length > 0 && (
+      {/* ── Sticky ToC nav ──────────────────────────────────────────────── */}
+      {tocHeadings.length > 0 && (
         <nav
           aria-label="On this page"
           className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-orange-200 shadow-sm"
@@ -181,13 +186,13 @@ const PolicyPage = ({ document }: { document: PolicyDocument }) => {
               <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 mr-2 flex-shrink-0">
                 Jump to
               </span>
-              {sections.slice(0, 12).map((section) => (
+              {tocHeadings.slice(0, 12).map((heading) => (
                 <a
-                  key={section.id}
-                  href={`#${section.id}`}
+                  key={heading.id}
+                  href={`#${heading.id}`}
                   className="flex-shrink-0 px-3 py-1.5 rounded-full text-sm text-slate-700 hover:text-red-700 hover:bg-red-50 border border-transparent hover:border-red-200 transition-colors duration-200"
                 >
-                  {section.text.replace(/^\d+\.\s+/, '')}
+                  {heading.text.replace(/^\d+\.\s+/, '')}
                 </a>
               ))}
             </div>
@@ -195,49 +200,17 @@ const PolicyPage = ({ document }: { document: PolicyDocument }) => {
         </nav>
       )}
 
+      {/* ── Content ─────────────────────────────────────────────────────── */}
       <main className="max-w-5xl mx-auto px-6 py-12">
         <article className="bg-white border border-orange-100 rounded-2xl shadow-sm p-6 md:p-10">
-          <div className="space-y-5">
-            {blocks.map((block, index) => {
-              if (block.type === 'heading') {
-                return (
-                  <h3
-                    key={`${block.id}-${index}`}
-                    id={block.id}
-                    className="scroll-mt-24 pt-6 text-2xl md:text-3xl font-bold text-slate-800"
-                  >
-                    {block.text}
-                  </h3>
-                );
-              }
-
-              if (block.type === 'subheading') {
-                return (
-                  <h4 key={`${block.text}-${index}`} className="pt-3 text-lg font-semibold text-slate-800">
-                    {block.text}
-                  </h4>
-                );
-              }
-
-              if (block.type === 'list') {
-                return (
-                  <ul key={`list-${index}`} className="space-y-2 pl-6 list-disc text-slate-600 leading-relaxed">
-                    {block.items.map((item) => (
-                      <li key={item}>{renderLinkedText(item)}</li>
-                    ))}
-                  </ul>
-                );
-              }
-
-              return (
-                <p key={`${block.text}-${index}`} className="text-slate-600 leading-relaxed">
-                  {renderLinkedText(block.text)}
-                </p>
-              );
-            })}
+          <div className="space-y-4">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+              {normalized}
+            </ReactMarkdown>
           </div>
         </article>
 
+        {/* ── Footer cards ────────────────────────────────────────────── */}
         <section className="mt-10 grid md:grid-cols-[1fr_2fr] gap-6">
           <div className="bg-slate-800 text-white rounded-2xl p-6">
             <Mail className="w-6 h-6 text-red-300 mb-3" />
