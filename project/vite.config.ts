@@ -13,6 +13,12 @@ export default defineConfig({
       input: {
         main: 'index.html',
         privacy: 'privacy.html',
+        terms: 'terms.html',
+        'about-meeli': 'about-meeli.html',
+        'community-guidelines': 'community-guidelines.html',
+        'safety-moderation': 'safety-moderation.html',
+        'data-deletion': 'data-deletion.html',
+        copyright: 'copyright.html',
       },
     },
   },

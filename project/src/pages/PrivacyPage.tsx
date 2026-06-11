@@ -1,3 +1,4 @@
+import Footer from '../components/Footer';
 import {
   ArrowLeft,
   Shield,
@@ -566,17 +567,7 @@ const PrivacyPage = () => {
         </div>
       </section>
 
-      {/* Footer back-link */}
-      <footer className="py-12 bg-slate-800 text-center">
-        <a
-          href="/"
-          className="inline-flex items-center text-slate-300 hover:text-white transition-colors duration-300"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          <span>Back to MeeLi home</span>
-        </a>
-        <p className="text-slate-500 text-sm mt-4">© 2025 MeeLi, Inc.</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -201,7 +201,7 @@ We will always prioritize the safety of our community — but we are a platform,
 
 ---
 
-**💫 8\. Faith, Spirituality & Personal Beliefs**
+## **💫 8\. Faith, Spirituality & Personal Beliefs**
 
 MeeLi is a place for the full human journey — and for many people, faith, spirituality, and personal beliefs are a meaningful part of that. Whether you're rooted in an organized religion, a spiritual practice, a personal philosophy, or still figuring it out — that journey is welcome here.
 

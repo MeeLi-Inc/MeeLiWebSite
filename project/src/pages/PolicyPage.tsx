@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm';
 import type { Components } from 'react-markdown';
 import { ArrowLeft, FileText, Home, Mail } from 'lucide-react';
 import { PolicyDocument, policyDocuments } from '../policies/policyData';
+import Footer from '../components/Footer';
 
 // Terms & Privacy use **N\. Title** bold paragraphs for numbered sections.
 // Normalise them to ## headings so styling and ToC work uniformly.
@@ -74,7 +75,7 @@ const buildComponents = (): Components => ({
 
   // ── Lists ─────────────────────────────────────────────────────────────────
   ul: ({ children }) => (
-    <ul className="space-y-1.5 pl-5 list-disc text-slate-600 leading-relaxed marker:text-orange-400">
+    <ul className="space-y-1.5 pl-5 list-disc text-slate-600 leading-relaxed marker:text-orange-400 inline-block text-left">
       {children}
     </ul>
   ),
@@ -203,7 +204,7 @@ const PolicyPage = ({ document }: { document: PolicyDocument }) => {
       {/* ── Content ─────────────────────────────────────────────────────── */}
       <main className="max-w-5xl mx-auto px-6 py-12">
         <article className="bg-white border border-orange-100 rounded-2xl shadow-sm p-6 md:p-10">
-          <div className="space-y-4">
+          <div className={`space-y-4${document.slug === 'about-meeli' ? ' text-center' : ''}`}>
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
               {normalized}
             </ReactMarkdown>
@@ -247,6 +248,7 @@ const PolicyPage = ({ document }: { document: PolicyDocument }) => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
